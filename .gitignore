@@ -38,6 +38,3 @@ MANIFEST
 # PyTorch
 *.pt
 *.pth
-
-# Data
-data/
