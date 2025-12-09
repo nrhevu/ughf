@@ -1,6 +1,6 @@
-# Loss Function Research Project
+# SADHI
 
-This repository contains code for researching and experimenting with new loss functions.
+A loss function designed for Image Quality Assessment (IQA) problems, balancing image fidelity, naturalness, and semantic context to optimize perceived image quality.
 
 ## Structure
 
@@ -16,7 +16,8 @@ This repository contains code for researching and experimenting with new loss fu
 ## Setup
 
 ```bash
-pip install -r requirements.txt
+pip install uv
+uv sync
 ```
 
 ## Usage

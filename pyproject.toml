@@ -1,7 +1,7 @@
 [project]
-name = "sadhi-metrics"
+name = "sadhi"
 version = "0.1.0"
-description = "Add your description here"
+description = "A loss function designed for Image Quality Assessment (IQA) problems, balancing image fidelity, naturalness, and semantic context to optimize perceived image quality."
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
