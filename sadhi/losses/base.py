@@ -1,22 +1,38 @@
 import torch.nn as nn
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 
-class BaseLoss(nn.Module, ABC):
-    """Abstract base class for custom loss functions."""
-    
+
+class LDistortion(nn.Module):
     def __init__(self):
         super().__init__()
-    
+
     @abstractmethod
-    def forward(self, input, target):
-        """
-        Compute the loss.
-        
-        Args:
-            input: The input tensor (predictions).
-            target: The target tensor (ground truth).
-            
-        Returns:
-            The computed loss value.
-        """
+    def forward(self, x, y):
+        pass
+
+
+class LNaturalness(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    @abstractmethod
+    def forward(self, y):
+        pass
+
+
+class LSemantics(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    @abstractmethod
+    def forward(self, y):
+        pass
+
+
+class ASCS(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    @abstractmethod
+    def forward(self, x):
         pass
