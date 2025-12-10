@@ -23,6 +23,6 @@ class SADHI(nn.Module):
         self.semantics = semantics
 
     def forward(self, x, y):
-        return (1 - self.ascs(x)) * self.distortion(x, y) + self.ascs(x) * (
+        return (1 - self.ascs(x, y)) * self.distortion(x, y) + self.ascs(x, y) * (
             self.w1 * self.naturalness(y) + self.w2 * self.semantics(y)
         )

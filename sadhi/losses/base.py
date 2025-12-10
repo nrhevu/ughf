@@ -34,5 +34,5 @@ class ASCS(nn.Module):
         super().__init__()
 
     @abstractmethod
-    def forward(self, x):
+    def forward(self, x, y):
         pass
