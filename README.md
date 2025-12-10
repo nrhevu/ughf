@@ -61,13 +61,13 @@ Only developer-approved testers can use it.
 
 ```bash
 # Download DiffIQA
-python sadhi/utils/gdown_zip.py --folder 1vZehlUPDyDfo6Mq1K8pAMe3pcjqdDRht --destination data/diffiq
+python sadhi/utils/gdown_zip.py --folder 1vZehlUPDyDfo6Mq1K8pAMe3pcjqdDRht --destination data/diffiqa
 ```
 
 ### Authenticate Google Drive
 When you run the script for the first time, it will open a browser window to authenticate your Google account. Follow the instructions in the browser to complete the authentication process.
 
-If you encounter an `HttpError 403` indicating that the 'Google Drive API has not been used in project ... or it is disabled', you need to enable the API, just read the error log and follow the instructions:
+If you encounter an `HttpError 403` indicating that the 'Google Drive API has not been used in project ... or it is disabled', you need to enable the API. You can do this by reading the error log and following the instructions:
 
 1. Visit the link provided in the error message (e.g., `https://console.developers.google.com/apis/api/drive.googleapis.com/overview?project=...`).
 2. Enable the Google Drive API for your project.
