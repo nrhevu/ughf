@@ -895,9 +895,9 @@ wheels = [
 ]
 
 [[package]]
-name = "sadhi-metrics"
+name = "sadhi"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "hydra-core" },
     { name = "matplotlib" },
@@ -906,6 +906,11 @@ dependencies = [
     { name = "torch" },
     { name = "torchvision" },
     { name = "tqdm" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "sadhi" },
 ]
 
 [package.metadata]
@@ -918,6 +923,9 @@ requires-dist = [
     { name = "torchvision", specifier = ">=0.15.0" },
     { name = "tqdm" },
 ]
+
+[package.metadata.requires-dev]
+dev = [{ name = "sadhi", editable = "." }]
 
 [[package]]
 name = "setuptools"

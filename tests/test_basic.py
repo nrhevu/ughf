@@ -1,6 +1,6 @@
 import torch
-from src.models.simple_model import SimpleModel
-from src.utils.metrics import mse
+from sadhi.models.simple_model import SimpleModel
+from sadhi.utils.metrics import mse
 
 def test_model_forward():
     model = SimpleModel()
