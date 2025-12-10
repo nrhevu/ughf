@@ -45,9 +45,12 @@ You need a Google OAuth client:
 If your Google Cloud OAuth app is not verified, Google restricts access to “test users only”.
 
 To allow login:
-	1.	Go to Google Cloud Console
-	2.	Open: API & Services → OAuth consent screen → Test users
-	3.	Add the Gmail account you will use to authenticate.
+
+1.	Go to Google Cloud Console
+
+2.	Open: API & Services → OAuth consent screen → Test users
+
+3.	Add the Gmail account you will use to authenticate.
 
 If you skip this, Google will show:
 
