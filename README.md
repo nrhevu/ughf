@@ -62,6 +62,8 @@ Only developer-approved testers can use it.
 ```bash
 # Download DiffIQA
 python sadhi/utils/gdown_zip.py --folder 1vZehlUPDyDfo6Mq1K8pAMe3pcjqdDRht --destination data/diffiqa
+
+gdown 1LhtLNDl6Jxwi6CPPVjX2_w4zIDRLFfbO --output data/
 ```
 
 ### Authenticate Google Drive
