@@ -14,7 +14,7 @@ from googleapiclient.http import MediaIoBaseDownload
 
 # If modifying scopes, delete the file token.pickle.
 SCOPES = ["https://www.googleapis.com/auth/drive.readonly"]
-
+    
 
 def get_service():
     """
@@ -125,14 +125,23 @@ def download_zip_files_recursive(folder_id, output_dir="downloads"):
         items = list_files_in_folder(service, current_folder_id)
         if not items:
             return
-        # Separate zip files and subfolders
-        zip_items = [i for i in items if i["name"].lower().endswith(".zip")]
+        # Separate files and subfolders
+        suffix_allowed = None
+        if suffix_allowed is not None:
+            download_items = [i for i in items if i["name"].lower().endswith(suffix_allowed)]
+        else:
+            download_items = [
+                i
+                for i in items
+                if i["mimeType"] != "application/vnd.google-apps.folder"
+            ]
+
         subfolders = [
             i for i in items if i["mimeType"] == "application/vnd.google-apps.folder"
         ]
 
-        # Download zip files into the current_path
-        for z in zip_items:
+        # Download files into the current_path
+        for z in download_items:
             file_id = z["id"]
             file_name = z["name"]
             download_file(service, file_id, file_name, current_path)
