@@ -1,0 +1,3 @@
+[submodule "sadhi/CLIP"]
+	path = sadhi/CLIP
+	url = https://github.com/openai/CLIP.git
