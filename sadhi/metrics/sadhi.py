@@ -1,18 +1,18 @@
 import torch
 import torch.nn as nn
 
-from .base import LAscs, LDistortion, LNaturalness, LSemantics
+from .base import ASCS, Distortion, Naturalness, Semantics
 
 
-class LSADHI(nn.Module):
+class SADHI(nn.Module):
     def __init__(
         self,
         w1,
         w2,
-        ascs: LAscs,
-        distortion: LDistortion,
-        naturalness: LNaturalness,
-        semantics: LSemantics,
+        ascs: ASCS,
+        distortion: Distortion,
+        naturalness: Naturalness,
+        semantics: Semantics,
     ):
         super().__init__()
         self.w1 = w1
