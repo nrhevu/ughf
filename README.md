@@ -26,7 +26,7 @@ uv sync
 python src/train.py
 ```
 
-## Data Download
+## Download Data
 
 ### Get Google API Credentials
 
@@ -95,6 +95,17 @@ apt update
 apt install p7zip-full
 7z x TrainImage.zip
 ```
+
+## Download Models
+
+Download pretrained models for A-FINE and CLIP ViT-B-32
+
+
+|      Model       |                                                               Download                                                                |
+|:----------------:|:-------------------------------------------------------------------------------------------------------------------------------------:|
+| CLIP ViT-B-32.pt | [OPENAI](https://openaipublic.azureedge.net/clip/models/40d365715913c9da98579312b702a82c18be219cc2a73407c4526f58eba950af/ViT-B-32.pt) |
+|    afine.pth     |                 [Google Drive](https://drive.google.com/drive/folders/1SgcMmv-9yejHYTT8F8hGN_5Vv8hfGMmR?usp=sharing)                  |
+
 
 # Acknowledgement
 [1]: Chen, Du & Wu, Tianhe & Ma, Kede & Zhang, Lei. (2025). Toward Generalized Image Quality Assessment: Relaxing the Perfect Reference Quality Assumption. 10.48550/arXiv.2503.11221.  
