@@ -2,7 +2,7 @@ import torch.nn as nn
 from abc import abstractmethod
 
 
-class LDistortion(nn.Module):
+class Distortion(nn.Module):
     def __init__(self):
         super().__init__()
 
@@ -11,7 +11,7 @@ class LDistortion(nn.Module):
         pass
 
 
-class LNaturalness(nn.Module):
+class Naturalness(nn.Module):
     def __init__(self):
         super().__init__()
 
@@ -20,7 +20,7 @@ class LNaturalness(nn.Module):
         pass
 
 
-class LSemantics(nn.Module):
+class Semantics(nn.Module):
     def __init__(self):
         super().__init__()
 
@@ -29,10 +29,12 @@ class LSemantics(nn.Module):
         pass
 
 
-class LAscs(nn.Module):
+class ASCS(nn.Module):
     def __init__(self):
         super().__init__()
 
     @abstractmethod
     def forward(self, x, y):
         pass
+
+
