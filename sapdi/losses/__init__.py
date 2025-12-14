@@ -1,3 +1,3 @@
-from .base import ASCS, LDistortion, LNaturalness, LSemantics, SADHI
+from .base import LAscs, LDistortion, LNaturalness, LSemantics
 
-__all__ = ["ASCS", "LDistortion", "LNaturalness", "LSemantics", "SADHI"]
+__all__ = ["LAscs", "LDistortion", "LNaturalness", "LSemantics"]

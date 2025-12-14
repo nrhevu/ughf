@@ -1,5 +1,9 @@
+from typing import Literal
+
 import torch
 import torch.nn as nn
+import torchvision
+from sapdi.clip import clip
 from torchvision.models.feature_extraction import create_feature_extractor
 
 from .base import LDistortion
@@ -45,9 +49,7 @@ class FeatureDistortionLoss(nn.Module):
 class DistortionLossWithBackbone(LDistortion):
     def __init__(
         self,
-        backbone: nn.Module,
-        return_nodes: dict,
-        weights,
+        backbone_model: Literal["vgg16", "resnet101", "clip_vit_b32"],
         eps=1e-3,
         reduction="mean",
     ):
@@ -57,6 +59,23 @@ class DistortionLossWithBackbone(LDistortion):
         weights: list of w_l corresponding to the order of return_nodes.values()
         """
         super().__init__()
+
+        # select backbone
+        if backbone_model == "vgg16":
+            backbone = torchvision.models.vgg16(weights="DEFAULT")
+            return_nodes = {"classifier.3": "f1", "classifier.6": "f2"}
+            weights = [1.0, 1.0]
+        elif backbone_model == "resnet101":
+            backbone = torchvision.models.resnet101(weights="DEFAULT")
+            return_nodes = {"avgpool": "f1"}
+            weights = [1.0]
+        elif backbone_model == "clip_vit_b32":
+            backbone = clip.load("ViT-B/32")[0]
+            return_nodes = {"visual.l2": "f1"}
+            weights = [1.0]
+        else:
+            raise ValueError("Invalid backbone model")
+
         self.backbone = create_feature_extractor(backbone, return_nodes=return_nodes)
         self.backbone.eval()
         for p in self.backbone.parameters():
