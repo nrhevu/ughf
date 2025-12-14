@@ -1,8 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from fca import *
-from layers import *
+from .layers import *
 
 
 class EBlock(nn.Module):

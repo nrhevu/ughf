@@ -4,7 +4,7 @@ from typing import List, Tuple
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from doconv_pytorch import *
+from .doconv_pytorch import *
 
 
 def _zigzag_low_freq_coords(h: int, w: int, k: int) -> Tuple[List[int], List[int]]:
