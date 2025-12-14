@@ -1,4 +1,4 @@
-# SADHI
+# SAPDI
 
 A loss function designed for Image Quality Assessment (IQA) problems, balancing image fidelity, naturalness, and semantic context to optimize perceived image quality.
 
@@ -18,6 +18,7 @@ A loss function designed for Image Quality Assessment (IQA) problems, balancing 
 ```bash
 pip install uv
 uv sync
+source .venv/bin/activate
 ```
 
 ## Usage
@@ -69,7 +70,7 @@ Data is available at [1].
 
 ```bash
 # Download DiffIQA
-python sadhi/utils/gdown.py --folder 1vZehlUPDyDfo6Mq1K8pAMe3pcjqdDRht --destination data/diffiqa
+python sapdi/utils/gdown.py --folder 1vZehlUPDyDfo6Mq1K8pAMe3pcjqdDRht --destination data/diffiqa
 
 # Download SRIQA-Bench
 gdown 1LhtLNDl6Jxwi6CPPVjX2_w4zIDRLFfbO --output data/

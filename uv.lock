@@ -1358,7 +1358,7 @@ wheels = [
 ]
 
 [[package]]
-name = "sadhi"
+name = "sapdi"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
@@ -1380,7 +1380,7 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "sadhi" },
+    { name = "sapdi" },
 ]
 
 [package.metadata]
@@ -1402,7 +1402,7 @@ requires-dist = [
 ]
 
 [package.metadata.requires-dev]
-dev = [{ name = "sadhi", editable = "." }]
+dev = [{ name = "sapdi", editable = "." }]
 
 [[package]]
 name = "setuptools"
