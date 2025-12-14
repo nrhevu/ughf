@@ -1,5 +1,7 @@
-import torch.nn as nn
 from abc import abstractmethod
+
+import torch
+import torch.nn as nn
 
 
 class LDistortion(nn.Module):
@@ -7,7 +9,7 @@ class LDistortion(nn.Module):
         super().__init__()
 
     @abstractmethod
-    def forward(self, x, y):
+    def forward(self, x: torch.Tensor, y: torch.Tensor):
         pass
 
 
@@ -16,7 +18,7 @@ class LNaturalness(nn.Module):
         super().__init__()
 
     @abstractmethod
-    def forward(self, y):
+    def forward(self, y: torch.Tensor):
         pass
 
 
@@ -25,7 +27,7 @@ class LSemantics(nn.Module):
         super().__init__()
 
     @abstractmethod
-    def forward(self, y):
+    def forward(self, y: torch.Tensor):
         pass
 
 
@@ -34,5 +36,5 @@ class LAscs(nn.Module):
         super().__init__()
 
     @abstractmethod
-    def forward(self, x, y):
+    def forward(self, x: torch.Tensor, y: torch.Tensor):
         pass
