@@ -1,9 +1,9 @@
-from layers import *
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-# from model import *
 from fca import *
+from layers import *
+
 
 class EBlock(nn.Module):
     def __init__(self, out_channel, num_res=8, ResBlock=ResBlock):
@@ -69,12 +69,9 @@ class udgn(nn.Module):
     def __init__(self, num_res=2, inference=False):
         super(udgn, self).__init__()
         self.inference = inference
-        #if not inference:
-           # BasicConv = BasicConv_do
-           # ResBlock = ResBlock_do_fft_bench
-        #else:
-        BasicConv = BasicConv_do_eval
-        ResBlock = ResBlock_do_fft_bench_eval
+        BasicConv = BasicConv_do
+        ResBlock = ResBlock_do_fft_bench
+            
         base_channel = 32
 
         self.Encoder = nn.ModuleList([
@@ -184,14 +181,10 @@ class udgn(nn.Module):
 
 class net(nn.Module):
     def __init__(self, num_res=12, inference=False):
-        super(net self).__init__()
+        super(net, self).__init__()
         self.inference = inference
-        if not inference:
-            BasicConv = BasicConv_do
-            ResBlock = ResBlock_do_fft_bench
-        else:
-            BasicConv = BasicConv_do_eval
-            ResBlock = ResBlock_do_fft_bench_eval
+        BasicConv = BasicConv_do
+        ResBlock = ResBlock_do_fft_bench
         base_channel = 32
 
         self.Encoder = nn.ModuleList([
@@ -239,8 +232,8 @@ class net(nn.Module):
         self.FAM2 = FAM(base_channel * 2, BasicConv=BasicConv)
         self.SCM2 = SCM(base_channel * 2, BasicConv=BasicConv)
 
-        self.att2 = MultiSpectralAttentionLayer(base_channel * 2, 7, 7, reduction=16, freq_sel_method='top16')
-        self.att1 = MultiSpectralAttentionLayer(base_channel * 4, 7, 7, reduction=16, freq_sel_method='top16')
+        self.att2 = MultiSpectralAttentionLayer(base_channel * 2, 7, 7, reduction=16, num_freq=16)
+        self.att1 = MultiSpectralAttentionLayer(base_channel * 4, 7, 7, reduction=16, num_freq=16)
         self.UDGN = udgn()
 
 
