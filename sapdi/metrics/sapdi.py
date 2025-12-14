@@ -1,12 +1,12 @@
 import torch
 import torch.nn as nn
-from sadhi.clip import clip
+from sapdi.clip import clip
 
 from .afine import AFINEDhead, AFINEQhead
 from .base import ASCS, Distortion, Naturalness, Semantics
 
 
-class SADHI(nn.Module):
+class SAPDI(nn.Module):
     def __init__(
         self,
         w1,

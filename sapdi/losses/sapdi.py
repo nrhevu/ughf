@@ -4,7 +4,7 @@ import torch.nn as nn
 from .base import LAscs, LDistortion, LNaturalness, LSemantics
 
 
-class LSADHI(nn.Module):
+class LSAPDI(nn.Module):
     def __init__(
         self,
         w1,

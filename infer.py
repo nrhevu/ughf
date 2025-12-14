@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Run SADHI inference on a single distorted‑reference image pair.
+"""Run SAPDI inference on a single distorted‑reference image pair.
 
 The script mirrors the behaviour of ``AFINE/QuickInference/afine.py`` but
-uses the SADHI model defined in ``sadhi/metrics/sadhi.py``.
+uses the SAPDI model defined in ``sapdi/metrics/sapdi.py``.
 
 Usage::
 
@@ -21,8 +21,8 @@ from pathlib import Path
 import torch
 import torchvision
 from PIL import Image
-from sadhi.metrics.base import ASCS, Semantics
-from sadhi.metrics.sadhi import SADHI
+from sapdi.metrics.base import ASCS, Semantics
+from sapdi.metrics.sapdi import SAPDI
 
 
 def load_image(img_path: Path, preprocess):
@@ -32,7 +32,7 @@ def load_image(img_path: Path, preprocess):
 
 
 def main():
-    parser = argparse.ArgumentParser(description="SADHI single‑image inference")
+    parser = argparse.ArgumentParser(description="SAPDI single‑image inference")
     parser.add_argument(
         "--afine-path",
         type=str,
@@ -64,8 +64,8 @@ def main():
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
-    # Instantiate SADHI model (the class internally loads the A‑FINE heads)
-    sadhi = SADHI(
+    # Instantiate SAPDI model (the class internally loads the A‑FINE heads)
+    sapdi = SAPDI(
         w1=args.w1,
         w2=args.w2,
         afine_path=args.afine_path,
@@ -73,8 +73,8 @@ def main():
         ascs_module=ASCS(),
         semantics_module=Semantics(),
     )
-    sadhi.to(device)
-    sadhi.eval()
+    sapdi.to(device)
+    sapdi.eval()
 
     # Prepare inputs
     preprocess = torchvision.transforms.Compose(
@@ -90,7 +90,7 @@ def main():
 
     # Forward pass – returns (distortion, naturalness)
     with torch.no_grad():
-        distortion_score, naturalness_score = sadhi(dis_tensor, ref_tensor)
+        distortion_score, naturalness_score = sapdi(dis_tensor, ref_tensor)
 
     # Convert to scalars for printing
     print(distortion_score)

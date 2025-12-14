@@ -3,7 +3,7 @@ requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "sadhi"
+name = "sapdi"
 version = "0.1.0"
 description = "A loss function designed for Image Quality Assessment (IQA) problems, balancing image fidelity, naturalness, and semantic context to optimize perceived image quality."
 readme = "README.md"
@@ -28,14 +28,14 @@ dependencies = [
 [tool.setuptools.packages.find]
 # All the following settings are optional:
 where = ["."]
-include = ["sadhi*", "scripts*"]
+include = ["sapdi*", "scripts*"]
 # exclude = ["mypackage.tests*"]
 namespaces = true
 
 [tool.uv.sources]
-sadhi = { workspace = true }
+sapdi = { workspace = true }
 
 [dependency-groups]
 dev = [
-    "sadhi"
+    "sapdi"
 ]
