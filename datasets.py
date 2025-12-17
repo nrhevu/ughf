@@ -1,10 +1,11 @@
 import os
-import numpy as np
-from torch.utils.data import Dataset
-import torch
-from PIL import Image
-import torchvision.transforms.functional as TF
 import random
+
+import numpy as np
+import torch
+import torchvision.transforms.functional as TF
+from PIL import Image
+from torch.utils.data import Dataset
 
 
 def is_image_file(filename):
@@ -159,3 +160,16 @@ class DataLoaderTest(Dataset):
 
         inp = TF.to_tensor(inp)
         return inp, filename
+
+
+def get_training_data(rgb_dir, img_options):
+    assert os.path.exists(rgb_dir)
+    return DataLoaderTrain(rgb_dir, img_options)
+
+def get_validation_data(rgb_dir, img_options):
+    assert os.path.exists(rgb_dir)
+    return DataLoaderVal(rgb_dir, img_options)
+
+def get_test_data(rgb_dir, img_options):
+    assert os.path.exists(rgb_dir)
+    return DataLoaderTest(rgb_dir, img_options)

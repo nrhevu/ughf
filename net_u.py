@@ -1,7 +1,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from .layers import *
+from layers import *
 
 
 class EBlock(nn.Module):
@@ -64,9 +64,9 @@ class FAM(nn.Module):
         return out
 
 
-class udgn(nn.Module):
+class UDGN(nn.Module):
     def __init__(self, num_res=2, inference=False):
-        super(udgn, self).__init__()
+        super(UDGN, self).__init__()
         self.inference = inference
         BasicConv = BasicConv_do
         ResBlock = ResBlock_do_fft_bench
@@ -178,9 +178,9 @@ class udgn(nn.Module):
         #else:
          #   return z + x
 
-class net(nn.Module):
+class HGDF(nn.Module):
     def __init__(self, num_res=12, inference=False):
-        super(net, self).__init__()
+        super(HGDF, self).__init__()
         self.inference = inference
         BasicConv = BasicConv_do
         ResBlock = ResBlock_do_fft_bench
@@ -233,12 +233,12 @@ class net(nn.Module):
 
         self.att2 = MultiSpectralAttentionLayer(base_channel * 2, 7, 7, reduction=16, num_freq=16)
         self.att1 = MultiSpectralAttentionLayer(base_channel * 4, 7, 7, reduction=16, num_freq=16)
-        self.UDGN = udgn()
+        self.udgn = UDGN()
 
 
     def forward(self, x):
         ###############S1#################
-        m=self.UDGN(x)
+        m = self.udgn(x)
         x_2 = F.interpolate(x, scale_factor=0.5)
         x_4 = F.interpolate(x_2, scale_factor=0.5)
         z2 = self.SCM2(x_2)
@@ -257,7 +257,8 @@ class net(nn.Module):
         z = self.att1(z)
         res3 = self.Encoder[2](z)
 
-        outputs = list()        
+        outputs = list()
+        outputs.extend(m)
 
         z12 = F.interpolate(res1, scale_factor=0.5)
         z21 = F.interpolate(res2, scale_factor=2)
