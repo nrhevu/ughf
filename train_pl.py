@@ -18,6 +18,27 @@ from net_u import HGDF as myNet
 from scheduler import GradualWarmupScheduler
 from torch.utils.data import DataLoader
 
+from torch.utils.data.dataloader import default_collate
+def safe_collate_fn(batch):
+    """
+    Lọc bỏ các item là None (do lỗi load ảnh hoặc sai size) 
+    trước khi gộp thành một batch hoàn chỉnh.
+    """
+    # Loại bỏ các mẫu bị None
+    batch = [item for item in batch if item is not None]
+    
+    # Nếu batch trống sau khi lọc, ta có thể trả về một batch rỗng 
+    # (nhưng tốt nhất là nên đảm bảo dataset đủ sạch để không xảy ra việc này)
+    if len(batch) == 0:
+        return None
+
+    try:
+        # Thử gộp batch như bình thường
+        return default_collate(batch)
+    except RuntimeError as e:
+        # Nếu lỗi kích thước (ví dụ: Trying to resize storage...)
+        print(f"\n[Batch Error] Cảnh báo: Batch bị bỏ qua do lỗi kích thước hoặc dữ liệu hỏng: {e}")
+        return None
 
 def _maybe_int(value: Optional[str]) -> Optional[Any]:
     """Convert strings representing integers into ints, keep everything else unchanged."""
@@ -75,6 +96,44 @@ class HFDTModule(pl.LightningModule):
         }
 
     def training_step(self, batch: Any, batch_idx: int) -> torch.Tensor:
+        if batch is None:
+            return None
+            loss = sum(p.sum() for p in self.model.parameters()) * 0.0
+            
+            self.log(
+            "train/loss", loss, on_step=True, prog_bar=True, logger=True
+            )
+            self.log(
+                "train/char_loss",
+                loss,
+                on_step=True,
+                prog_bar=False,
+                logger=True,
+            )
+            self.log(
+                "train/edge_loss",
+                loss,
+                on_step=True,
+                prog_bar=False,
+                logger=True,
+            )
+            self.log(
+                "train/fft_loss",
+                loss,
+                on_step=True,
+                prog_bar=False,
+                logger=True,
+            )
+            self.log(
+                "train/mse_loss",
+                loss,
+                on_step=True,
+                prog_bar=False,
+                logger=True,
+            )
+
+            return loss
+        
         target = batch[0]
         inputs = batch[1]
 
@@ -201,6 +260,7 @@ class ImageRestorationDataModule(pl.LightningDataModule):
             num_workers=self.num_workers,
             drop_last=False,
             pin_memory=True,
+            collate_fn=safe_collate_fn
         )
 
     def val_dataloader(self) -> DataLoader:
@@ -211,6 +271,7 @@ class ImageRestorationDataModule(pl.LightningDataModule):
             num_workers=self.num_workers,
             drop_last=False,
             pin_memory=True,
+            collate_fn=safe_collate_fn
         )
 
 
